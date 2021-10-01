@@ -10,7 +10,6 @@ import com.google.android.exoplayer2.util.Util
 import kotlinx.coroutines.channels.Channel
 import okhttp3.OkHttpClient
 import org.jellyfin.mobile.api.DeviceProfileBuilder
-import org.jellyfin.mobile.bridge.ExternalPlayer
 import org.jellyfin.mobile.controller.ApiController
 import org.jellyfin.mobile.fragment.ConnectFragment
 import org.jellyfin.mobile.fragment.WebViewFragment
@@ -54,8 +53,6 @@ val applicationModule = module {
     // Media player helpers
     single { MediaSourceResolver(get(), get(), get()) }
     single { DeviceProfileBuilder() }
-    single { get<DeviceProfileBuilder>().getDeviceProfile() }
-    single(named(ExternalPlayer.DEVICE_PROFILE_NAME)) { get<DeviceProfileBuilder>().getExternalPlayerProfile() }
 
     // ExoPlayer data sources
     single<DataSource.Factory> { DefaultDataSourceFactory(androidApplication(), Util.getUserAgent(androidApplication(), Constants.APP_INFO_NAME)) }

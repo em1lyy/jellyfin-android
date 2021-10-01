@@ -13,6 +13,7 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.source.SingleSampleMediaSource
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import org.jellyfin.mobile.api.DeviceProfileBuilder
 import org.jellyfin.mobile.bridge.PlayOptions
 import org.jellyfin.mobile.player.PlayerException
 import org.jellyfin.mobile.player.PlayerViewModel
@@ -34,12 +35,13 @@ class MediaQueueManager(
 ) : KoinComponent {
     private val apiClient: ApiClient by inject()
     private val mediaSourceResolver: MediaSourceResolver by inject()
-    private val deviceProfile: DeviceProfile by inject()
+    private val deviceProfileBuilder: DeviceProfileBuilder by inject()
     private val videosApi: VideosApi by inject()
     val trackSelector = DefaultTrackSelector(viewModel.getApplication<Application>())
     private val _mediaQueue: MutableLiveData<QueueItem.Loaded> = MutableLiveData()
     val mediaQueue: LiveData<QueueItem.Loaded> get() = _mediaQueue
 
+    private var deviceProfile = deviceProfileBuilder.getDeviceProfile()
     private var currentPlayOptions: PlayOptions? = null
 
     /**
