@@ -15,15 +15,15 @@ class CastOptionsProvider : OptionsProvider {
     }
 
     companion object {
-        /** The app id.  */
-        private var appId: String? = null
+        /** The app id. */
+        private lateinit var appId: String
 
         /**
          * Sets the app ID.
          * @param applicationId appId
          */
         @JvmStatic
-        fun setAppId(applicationId: String?) {
+        fun setAppId(applicationId: String) {
             appId = applicationId
         }
     }
