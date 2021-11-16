@@ -133,6 +133,8 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application),
                 )
             } catch (e: ApiClientException) {
                 Timber.e(e, "Failed to load display preferences")
+            } catch (e: IllegalArgumentException /* kotlinx.serialization.SerializationException */) {
+                Timber.e(e, "Failed to load display preferences")
             }
         }
 
